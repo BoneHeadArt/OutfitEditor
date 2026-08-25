@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Outfit Builder</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f1ec;
+        color: #222;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 15px;
+    }
+
+    .app {
+        width: 100%;
+        max-width: 520px;
+    }
+
+    h1 {
+        text-align: center;
+        margin: 0 0 20px;
+        font-size: 28px;
+    }
+
+    .outfit-builder {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .clothing-section {
+        position: relative;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+
+        display: grid;
+        grid-template-columns: 55px 1fr 55px;
+        align-items: center;
+
+        min-height: 220px;
+
+        box-shadow:
+            0 3px 12px rgba(0,0,0,.08);
+    }
+
+    .section-label {
+        position: absolute;
+        top: 10px;
+        left: 14px;
+
+        z-index: 5;
+
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+
+        background: rgba(255,255,255,.85);
+        padding: 5px 8px;
+        border-radius: 20px;
+    }
+
+    .image-container {
+        height: 220px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        overflow: hidden;
+        position: relative;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+
+        user-select: none;
+        -webkit-user-drag: none;
+
+        transition:
+            opacity .18s ease,
+            transform .18s ease;
+    }
+
+    .image-container img.changing {
+        opacity: 0;
+        transform: scale(.97);
+    }
+
+    button.arrow {
+        width: 42px;
+        height: 42px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: #222;
+        color: white;
+
+        font-size: 26px;
+        line-height: 1;
+
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: auto;
+
+        transition:
+            transform .15s ease,
+            background .15s ease;
+    }
+
+    button.arrow:hover {
+        background: #444;
+        transform: scale(1.08);
+    }
+
+    button.arrow:active {
+        transform: scale(.95);
+    }
+
+    .counter {
+        position: absolute;
+        bottom: 8px;
+        right: 12px;
+
+        background: rgba(0,0,0,.65);
+        color: white;
+
+        font-size: 11px;
+
+        padding: 4px 7px;
+        border-radius: 10px;
+    }
+
+    .instructions {
+        text-align: center;
+        margin-top: 18px;
+        font-size: 12px;
+        color: #777;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 500px) {
+
+        body {
+            padding: 15px 10px;
+        }
+
+        .clothing-section {
+            grid-template-columns: 45px 1fr 45px;
+            min-height: 190px;
+        }
+
+        .image-container {
+            height: 190px;
+        }
+
+        button.arrow {
+            width: 36px;
+            height: 36px;
+            font-size: 22px;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <h1>Outfit Builder</h1>
+
+    <div class="outfit-builder">
+
+        <!-- TOPS -->
+
+        <div class="clothing-section" data-category="tops">
+
+            <div class="section-label">
+                Tops
+            </div>
+
+            <button
+                class="arrow left"
+                aria-label="Previous top">
+                ‹
+            </button>
+
+            <div class="image-container">
+                <img
+                    id="tops-image"
+                    src=""
+                    alt="Selected top">
+
+                <div
+                    class="counter"
+                    id="tops-counter">
+                </div>
+            </div>
+
+            <button
+                class="arrow right"
+                aria-label="Next top">
+                ›
+            </button>
+
+        </div>
+
+
+        <!-- BOTTOMS -->
+
+        <div class="clothing-section" data-category="bottoms">
+
+            <div class="section-label">
+                Bottoms
+            </div>
+
+            <button
+                class="arrow left"
+                aria-label="Previous bottom">
+                ‹
+            </button>
+
+            <div class="image-container">
+
+                <img
+                    id="bottoms-image"
+                    src=""
+                    alt="Selected bottoms">
+
+                <div
+                    class="counter"
+                    id="bottoms-counter">
+                </div>
+
+            </div>
+
+            <button
+                class="arrow right"
+                aria-label="Next bottom">
+                ›
+            </button>
+
+        </div>
+
+
+        <!-- SHOES -->
+
+        <div class="clothing-section" data-category="shoes">
+
+            <div class="section-label">
+                Shoes
+            </div>
+
+            <button
+                class="arrow left"
+                aria-label="Previous shoes">
+                ‹
+            </button>
+
+            <div class="image-container">
+
+                <img
+                    id="shoes-image"
+                    src=""
+                    alt="Selected shoes">
+
+                <div
+                    class="counter"
+                    id="shoes-counter">
+                </div>
+
+            </div>
+
+            <button
+                class="arrow right"
+                aria-label="Next shoes">
+                ›
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="instructions">
+        Click the arrows or scroll your mouse over each section.<br>
+        Keyboard: 1 = Tops, 2 = Bottoms, 3 = Shoes.
+        Then use ← and →.
+    </div>
+
+</div>
+
+
+<script>
+
+/*
+=====================================================
+OUTFIT IMAGE LISTS
+=====================================================
+
+Add your image filenames here.
+
+The images are assumed to be inside:
+
+tops/
+bottoms/
+shoes/
+
+Example:
+
+tops/top1.png
+tops/top2.png
+
+=====================================================
+*/
+
+
+const wardrobe = {
+
+    tops: [
+        "top1.png",
+        "top2.png",
+        "top3.png"
+    ],
+
+    bottoms: [
+        "bottom1.png",
+        "bottom2.png",
+        "bottom3.png"
+    ],
+
+    shoes: [
+        "shoes1.png",
+        "shoes2.png",
+        "shoes3.png"
+    ]
+
+};
+
+
+
+/*
+=====================================================
+CURRENT IMAGE POSITION
+=====================================================
+*/
+
+const currentIndex = {
+
+    tops: 0,
+    bottoms: 0,
+    shoes: 0
+
+};
+
+
+let activeCategory = "tops";
+
+
+/*
+=====================================================
+UPDATE IMAGE
+=====================================================
+*/
+
+function updateImage(category, animate = true) {
+
+    const image =
+        document.getElementById(category + "-image");
+
+    const counter =
+        document.getElementById(category + "-counter");
+
+    const images =
+        wardrobe[category];
+
+
+    if (!images || images.length === 0) {
+
+        image.removeAttribute("src");
+
+        counter.textContent =
+            "No images";
+
+        return;
+
+    }
+
+
+    const filename =
+        images[currentIndex[category]];
+
+    const newSource =
+        category + "/" + filename;
+
+
+    if (animate) {
+
+        image.classList.add("changing");
+
+        setTimeout(() => {
+
+            image.src = newSource;
+
+            image.classList.remove("changing");
+
+        }, 120);
+
+    }
+
+    else {
+
+        image.src = newSource;
+
+    }
+
+
+    counter.textContent =
+        (currentIndex[category] + 1)
+        + " / "
+        + images.length;
+
+}
+
+
+
+/*
+=====================================================
+NEXT / PREVIOUS
+=====================================================
+*/
+
+function nextImage(category) {
+
+    const images =
+        wardrobe[category];
+
+    if (!images.length)
+        return;
+
+
+    currentIndex[category]++;
+
+    if (
+        currentIndex[category]
+        >= images.length
+    ) {
+
+        currentIndex[category] = 0;
+
+    }
+
+    updateImage(category);
+
+}
+
+
+
+function previousImage(category) {
+
+    const images =
+        wardrobe[category];
+
+    if (!images.length)
+        return;
+
+
+    currentIndex[category]--;
+
+    if (
+        currentIndex[category] < 0
+    ) {
+
+        currentIndex[category] =
+            images.length - 1;
+
+    }
+
+    updateImage(category);
+
+}
+
+
+
+/*
+=====================================================
+BUTTON EVENTS
+=====================================================
+*/
+
+document
+.querySelectorAll(".clothing-section")
+.forEach(section => {
+
+    const category =
+        section.dataset.category;
+
+    const leftButton =
+        section.querySelector(".left");
+
+    const rightButton =
+        section.querySelector(".right");
+
+
+    leftButton.addEventListener(
+        "click",
+        () => {
+
+            activeCategory = category;
+
+            previousImage(category);
+
+        }
+    );
+
+
+    rightButton.addEventListener(
+        "click",
+        () => {
+
+            activeCategory = category;
+
+            nextImage(category);
+
+        }
+    );
+
+
+    /*
+    Mouse wheel support
+    */
+
+    section.addEventListener(
+        "wheel",
+        event => {
+
+            event.preventDefault();
+
+            activeCategory = category;
+
+            if (event.deltaY > 0) {
+
+                nextImage(category);
+
+            }
+
+            else {
+
+                previousImage(category);
+
+            }
+
+        },
+        {
+            passive: false
+        }
+    );
+
+
+    /*
+    Clicking the section
+    makes it the keyboard-active section
+    */
+
+    section.addEventListener(
+        "click",
+        () => {
+
+            activeCategory = category;
+
+        }
+    );
+
+});
+
+
+
+/*
+=====================================================
+KEYBOARD CONTROLS
+=====================================================
+
+1 = Tops
+2 = Bottoms
+3 = Shoes
+
+Arrow Left / Right changes item.
+
+=====================================================
+*/
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "1") {
+
+            activeCategory = "tops";
+
+        }
+
+        else if (event.key === "2") {
+
+            activeCategory = "bottoms";
+
+        }
+
+        else if (event.key === "3") {
+
+            activeCategory = "shoes";
+
+        }
+
+        else if (
+            event.key === "ArrowRight"
+        ) {
+
+            nextImage(activeCategory);
+
+        }
+
+        else if (
+            event.key === "ArrowLeft"
+        ) {
+
+            previousImage(activeCategory);
+
+        }
+
+    }
+);
+
+
+
+/*
+=====================================================
+INITIAL LOAD
+=====================================================
+*/
+
+updateImage("tops", false);
+updateImage("bottoms", false);
+updateImage("shoes", false);
+
+
+</script>
+
+</body>
+</html>
