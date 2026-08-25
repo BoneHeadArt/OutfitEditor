@@ -151,26 +151,4 @@ button.arrow:active {
 }
 
 
-/* =========================================
-   MOBILE / IPHONE
-========================================= */
 
-@media (max-width: 500px) {
-
-    body {
-        padding: 15px 10px;
-    }
-
-    .clothing-section {
-        grid-template-columns: 45px 1fr 45px;
-        
-    }
-
-
-
-    button.arrow {
-        width: 36px;
-        height: 36px;
-        font-size: 22px;
-    }
-}
