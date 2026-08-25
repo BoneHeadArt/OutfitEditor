@@ -42,7 +42,7 @@ h1 {
     grid-template-columns: 55px 1fr 55px;
     align-items: center;
 
-    min-height: 220px;
+    
 
     box-shadow:
         0 3px 12px rgba(0,0,0,.08);
