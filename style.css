@@ -163,7 +163,7 @@ button.arrow:active {
 
     .clothing-section {
         grid-template-columns: 45px 1fr 45px;
-        min-height: 190px;
+        
     }
 
 
