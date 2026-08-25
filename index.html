@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Outfit Builder</title>
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <h1>Outfit Builder</h1>
+
+    <div class="outfit-builder">
+
+        <!-- TOPS -->
+        <div class="clothing-section" data-category="tops">
+
+            <div class="section-label">
+                Tops
+            </div>
+
+            <button
+                class="arrow left"
+                aria-label="Previous top">
+                ‹
+            </button>
+
+            <div class="image-container">
+
+                <img
+                    id="tops-image"
+                    src=""
+                    alt="Selected top">
+
+                <div
+                    class="counter"
+                    id="tops-counter">
+                </div>
+
+            </div>
+
+            <button
+                class="arrow right"
+                aria-label="Next top">
+                ›
+            </button>
+
+        </div>
+
+
+        <!-- BOTTOMS -->
+        <div class="clothing-section" data-category="bottoms">
+
+            <div class="section-label">
+                Bottoms
+            </div>
+
+            <button
+                class="arrow left"
+                aria-label="Previous bottom">
+                ‹
+            </button>
+
+            <div class="image-container">
+
+                <img
+                    id="bottoms-image"
+                    src=""
+                    alt="Selected bottoms">
+
+                <div
+                    class="counter"
+                    id="bottoms-counter">
+                </div>
+
+            </div>
+
+            <button
+                class="arrow right"
+                aria-label="Next bottom">
+                ›
+            </button>
+
+        </div>
+
+
+        <!-- SHOES -->
+        <div class="clothing-section" data-category="shoes">
+
+            <div class="section-label">
+                Shoes
+            </div>
+
+            <button
+                class="arrow left"
+                aria-label="Previous shoes">
+                ‹
+            </button>
+
+            <div class="image-container">
+
+                <img
+                    id="shoes-image"
+                    src=""
+                    alt="Selected shoes">
+
+                <div
+                    class="counter"
+                    id="shoes-counter">
+                </div>
+
+            </div>
+
+            <button
+                class="arrow right"
+                aria-label="Next shoes">
+                ›
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="instructions">
+        Click the arrows or scroll your mouse over each section.<br>
+        Keyboard: 1 = Tops, 2 = Bottoms, 3 = Shoes.
+        Then use ← and →.
+    </div>
+
+</div>
+
+<!-- Link to JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>
